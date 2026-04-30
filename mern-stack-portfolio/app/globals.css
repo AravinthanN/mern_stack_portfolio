@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+:root {
+  --background: #3a1e22;
+  --foreground: #faf5ef;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-space-grotesk);
+  --font-display: var(--font-sora);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 12% 16%, #8d7b68 0%, transparent 36%),
+    radial-gradient(circle at 82% 12%, #a4907c 0%, transparent 35%),
+    radial-gradient(circle at 76% 84%, #c8b6a6 0%, transparent 24%),
+    linear-gradient(160deg, #3a1e22 0%, #54363b 45%, #8d7b68 100%);
+  color: var(--foreground);
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+
+.glow-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+.reveal-up {
+  animation: slideUp 900ms cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.reveal-right {
+  animation: slideRight 900ms cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.reveal-left {
+  animation: slideLeft 900ms cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.lift-hover {
+  transition: transform 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
+}
+
+.lift-hover:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 18px 50px -25px rgba(250, 245, 239, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-slow,
+  .glow-pulse,
+  .reveal-up,
+  .reveal-right,
+  .reveal-left,
+  .lift-hover,
+  .lift-hover:hover {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+}
