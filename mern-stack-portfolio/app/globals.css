@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #3a1e22;
-  --foreground: #faf5ef;
+  --background: #f7f9fc;
+  --surface: #f5eee3;
+  --surface-2: #ede3c7;
+  --card: #e8dfc4;
+  --card-strong: #d7c9b0;
+  --skin: #d8caa3;
+  --brown: #8a7358;
+  --green: #22c55e;
+  --green-deep: #166534;
+  --text-primary: #3f4f44;
+  --text-secondary: #54402f;
+  --text-muted: #6b5846;
+  --foreground: #3f4f44;
 }
 
 @theme inline {
@@ -19,10 +30,10 @@
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 12% 16%, #8d7b68 0%, transparent 36%),
-    radial-gradient(circle at 82% 12%, #a4907c 0%, transparent 35%),
-    radial-gradient(circle at 76% 84%, #c8b6a6 0%, transparent 24%),
-    linear-gradient(160deg, #3a1e22 0%, #54363b 45%, #8d7b68 100%);
+    radial-gradient(circle at 12% 18%, rgba(34, 197, 94, 0.13) 0%, transparent 34%),
+    radial-gradient(circle at 85% 14%, rgba(216, 202, 163, 0.32) 0%, transparent 36%),
+    radial-gradient(circle at 78% 84%, rgba(245, 238, 227, 0.95) 0%, transparent 28%),
+    linear-gradient(160deg, #f7f9fc 0%, #f5eee3 45%, #ede3c7 100%);
   color: var(--foreground);
   font-family: var(--font-space-grotesk), sans-serif;
 }
@@ -91,15 +102,27 @@ body {
 }
 
 .reveal-up {
-  animation: slideUp 900ms cubic-bezier(0.19, 1, 0.22, 1) both;
+  opacity: 0;
 }
 
 .reveal-right {
-  animation: slideRight 900ms cubic-bezier(0.19, 1, 0.22, 1) both;
+  opacity: 0;
 }
 
 .reveal-left {
-  animation: slideLeft 900ms cubic-bezier(0.19, 1, 0.22, 1) both;
+  opacity: 0;
+}
+
+.reveal-up.is-visible {
+  animation: slideUp 1100ms cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.reveal-right.is-visible {
+  animation: slideRight 1100ms cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+.reveal-left.is-visible {
+  animation: slideLeft 1100ms cubic-bezier(0.19, 1, 0.22, 1) both;
 }
 
 .lift-hover {
@@ -108,7 +131,47 @@ body {
 
 .lift-hover:hover {
   transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 18px 50px -25px rgba(250, 245, 239, 0.45);
+  box-shadow: 0 22px 48px -28px rgba(34, 197, 94, 0.35);
+}
+
+.bg-surface-2 {
+  background-color: color-mix(in oklab, var(--surface) 84%, white 16%);
+}
+
+.bg-card {
+  background-color: color-mix(in oklab, var(--card) 80%, white 20%);
+}
+
+.bg-card-soft {
+  background-color: color-mix(in oklab, var(--card-strong) 68%, var(--card) 32%);
+}
+
+.bg-chip {
+  background-color: color-mix(in oklab, var(--skin) 56%, white 44%);
+}
+
+.bg-chip:hover {
+  background-color: color-mix(in oklab, var(--green) 28%, var(--skin) 72%);
+}
+
+.border-soft {
+  border-color: color-mix(in oklab, var(--brown) 40%, #d7c9b0 60%);
+}
+
+.border-strong {
+  border-color: color-mix(in oklab, var(--green-deep) 34%, var(--brown) 66%);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -117,10 +180,14 @@ body {
   .reveal-up,
   .reveal-right,
   .reveal-left,
+  .reveal-up.is-visible,
+  .reveal-right.is-visible,
+  .reveal-left.is-visible,
   .lift-hover,
   .lift-hover:hover {
     animation: none;
     transition: none;
     transform: none;
+    opacity: 1;
   }
 }
