@@ -61,6 +61,16 @@ jobs:
         working-directory: mern-stack-portfolio
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
+      - name: Debug Vercel Link
+        working-directory: mern-stack-portfolio
+        run: |
+          echo "VERCEL_ORG_ID(from secret): $VERCEL_ORG_ID"
+          echo "VERCEL_PROJECT_ID(from secret): $VERCEL_PROJECT_ID"
+          echo "Linked project file:"
+          cat .vercel/project.json
+          echo "Vercel account:"
+          vercel whoami --token=${{ secrets.VERCEL_TOKEN }}
+
       - name: Deploy to Vercel Production
         working-directory: mern-stack-portfolio
         run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
