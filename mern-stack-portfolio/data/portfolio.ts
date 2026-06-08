@@ -1,14 +1,14 @@
 export const profile = {
   role: "Full Stack Developer",
   name: "ARAVINTHAN N",
-  tagline: "2 Years Experience | React.js, Node.js, GraphQL, AWS, MongoDB",
+  tagline: "1.10 Years Experience | React.js, Node.js, GraphQL, AWS, MongoDB",
   email: "aravinthankpt@gmail.com",
   phone: "+91 8637435264",
   location: "Chennai, India",
 };
 
 export const summary =
-  "Results-driven Full-Stack Developer with 1.9 years of experience building scalable Industrial IoT platforms. I design secure GraphQL APIs, build real-time MQTT-powered dashboards, and deliver high-performance applications with React, TypeScript, and Node.js. I focus on maintainable architecture, clean code, and reliable deployments on AWS.";
+  "Results-driven Full-Stack Developer with 1.10 years of experience building scalable Industrial IoT platforms. I design secure GraphQL APIs, build real-time MQTT-powered dashboards, and deliver high-performance applications with React, TypeScript, and Node.js. I focus on maintainable architecture, clean code, and reliable deployments on AWS.";
 
 export const skills = [
   "React.js",
