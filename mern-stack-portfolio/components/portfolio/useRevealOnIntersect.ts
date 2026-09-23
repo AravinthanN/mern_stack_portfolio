@@ -6,6 +6,16 @@ export default function useRevealOnIntersect<T extends HTMLElement>() {
   const refs = useRef<Array<T | null>>([]);
 
   useEffect(() => {
+    const nodes = refs.current.filter((node): node is T => Boolean(node));
+
+    if (nodes.length === 0) {
+      return;
+    }
+
+    nodes.forEach((node) => {
+      node.classList.add("is-visible");
+    });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -23,10 +33,8 @@ export default function useRevealOnIntersect<T extends HTMLElement>() {
       },
     );
 
-    refs.current.forEach((node) => {
-      if (node) {
-        observer.observe(node);
-      }
+    nodes.forEach((node) => {
+      observer.observe(node);
     });
 
     return () => observer.disconnect();

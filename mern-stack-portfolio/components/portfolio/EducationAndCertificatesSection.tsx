@@ -28,12 +28,12 @@ export default function EducationAndCertificatesSection() {
         <article
           key={item.title}
           ref={setArticleRef(index)}
-          className={`${item.wrapperClassName} bg-surface-2 border-soft rounded-3xl border p-7 lift-hover`}
+          className={`${item.wrapperClassName} bg-surface-2 border-soft rounded-[28px] border p-7 lift-hover`}
         >
           <SectionTitle>{item.title}</SectionTitle>
-          <div className="bg-card-soft border-strong mt-4 rounded-2xl border p-5 transition-all duration-300 ease-out transform-gpu hover:-translate-y-1 hover:bg-card hover:shadow-[0_18px_45px_-28px_rgba(34,197,94,0.5)]">
-            <p className="text-primary">{item.heading}</p>
-            <p className="text-secondary mt-1">{item.subheading}</p>
+          <div className="bg-card-soft border-strong mt-5 rounded-2xl border p-5 transition-all duration-300 ease-out transform-gpu hover:-translate-y-1 hover:bg-card hover:shadow-[0_18px_45px_-28px_rgba(74,222,128,0.7)]">
+            <p className="text-primary font-medium">{item.heading}</p>
+            <p className="text-secondary mt-2">{item.subheading}</p>
           </div>
         </article>
       ))}

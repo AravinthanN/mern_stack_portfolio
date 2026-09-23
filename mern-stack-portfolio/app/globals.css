@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f9fc;
-  --surface: #f5eee3;
-  --surface-2: #ede3c7;
-  --card: #e8dfc4;
-  --card-strong: #d7c9b0;
-  --skin: #d8caa3;
-  --brown: #8a7358;
-  --green: #22c55e;
-  --green-deep: #166534;
-  --text-primary: #3f4f44;
-  --text-secondary: #54402f;
-  --text-muted: #6b5846;
-  --foreground: #3f4f44;
+  --background: #07130f;
+  --surface: #0d1d1a;
+  --surface-2: #112824;
+  --card: #17362f;
+  --card-strong: #1d463f;
+  --skin: #d4f7d8;
+  --brown: #89a29b;
+  --green: #4ade80;
+  --green-deep: #22c55e;
+  --text-primary: #ecfdf5;
+  --text-secondary: #dbeae3;
+  --text-muted: #a7b9b3;
+  --foreground: #ecfdf5;
 }
 
 @theme inline {
@@ -27,13 +27,16 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 12% 18%, rgba(34, 197, 94, 0.13) 0%, transparent 34%),
-    radial-gradient(circle at 85% 14%, rgba(216, 202, 163, 0.32) 0%, transparent 36%),
-    radial-gradient(circle at 78% 84%, rgba(245, 238, 227, 0.95) 0%, transparent 28%),
-    linear-gradient(160deg, #f7f9fc 0%, #f5eee3 45%, #ede3c7 100%);
+    radial-gradient(circle at top left, rgba(74, 222, 128, 0.16) 0%, transparent 30%),
+    radial-gradient(circle at right center, rgba(188, 230, 199, 0.15) 0%, transparent 26%),
+    linear-gradient(135deg, #07130f 0%, #0d1d1a 40%, #112824 100%);
   color: var(--foreground);
   font-family: var(--font-space-grotesk), sans-serif;
 }
