@@ -1,7 +1,7 @@
 export const profile = {
   role: "Full Stack Developer",
   name: "ARAVINTHAN N",
-  tagline: "2+ Years Experience | React.js, Next.js, TypeScript, Node.js, Express.js, GraphQL, MongoDB",
+  tagline: "Design-minded developer turning complex systems into clear, thoughtful digital experiences.",
   email: "aravinthankpt@gmail.com",
   phone: "+91 8637435264",
   location: "Coimbatore, Tamil Nadu",

@@ -6,12 +6,14 @@ import useRevealOnIntersect from "./useRevealOnIntersect";
 
 const sectionItems = [
   {
+    id: "education",
     title: "Education",
     wrapperClassName: "reveal-right [animation-delay:500ms]",
     heading: education.degree,
     subheading: education.institute,
   },
   {
+    id: "certificates",
     title: "Certificates",
     wrapperClassName: "reveal-left [animation-delay:580ms]",
     heading: certification.name,
@@ -26,6 +28,7 @@ export default function EducationAndCertificatesSection() {
     <section className="grid gap-7 lg:grid-cols-2">
       {sectionItems.map((item, index) => (
         <article
+          id={item.id}
           key={item.title}
           ref={setArticleRef(index)}
           className={`${item.wrapperClassName} bg-surface-2 border-soft rounded-[28px] border p-7 lift-hover`}
