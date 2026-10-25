@@ -1,3 +1,4 @@
+
 name: CI-CD
 
 on:
@@ -41,9 +42,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: quality-and-build
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -53,24 +56,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+          cache-dependency-path: mern-stack-portfolio/package-lock.json
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Pull Vercel Environment Information
-        working-directory: mern-stack-portfolio
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Verify Vercel Authentication
+        run: vercel whoami
 
-      - name: Debug Vercel Link
+      - name: Pull Vercel Production Settings
         working-directory: mern-stack-portfolio
-        run: |
-          echo "VERCEL_ORG_ID(from secret): $VERCEL_ORG_ID"
-          echo "VERCEL_PROJECT_ID(from secret): $VERCEL_PROJECT_ID"
-          echo "Linked project file:"
-          cat .vercel/project.json
-          echo "Vercel account:"
-          vercel whoami --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=production
+
+      - name: Build Vercel Production Artifacts
+        working-directory: mern-stack-portfolio
+        run: vercel build --prod
 
       - name: Deploy to Vercel Production
         working-directory: mern-stack-portfolio
-        run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prebuilt --prod
