@@ -14,7 +14,7 @@ const skillOpeners = ["My boss builds with", "A tool in my boss's toolkit is", "
 const SECTION_OPENERS: Record<string, string> = {
     top: "Welcome! Want a little tour of my boss's portfolio?",
     about: "Curious about my boss? Here's a little about how he works.",
-    skills: "Oh, checking out my boss's skills? Let me tell you about the toolkit.",
+    skills: "Oh, checking out my boss's skills?",
     experience: "You've found my boss's work story. Let me share a few highlights.",
     projects: "Oh, interested in my boss's projects? Let me tell you what he built.",
     achievements: "Want to hear what my boss is proud of? Here are a few results.",
@@ -245,9 +245,14 @@ export default function GoofyBuddy() {
             }
         };
 
+        let sectionExitTimer: number | null = null;
         const updateSectionAtCursor = (x: number, y: number) => {
             const elementUnderCursor = document.elementFromPoint(x, y);
-            if (elementUnderCursor?.closest(".buddy-anchor")) return;
+            if (elementUnderCursor?.closest(".buddy-anchor")) {
+                if (sectionExitTimer) window.clearTimeout(sectionExitTimer);
+                sectionExitTimer = null;
+                return;
+            }
 
             const sectionUnderCursor = sectionIds
                 .flatMap((id) => {
@@ -259,7 +264,17 @@ export default function GoofyBuddy() {
                 })
                 .sort((a, b) => a.area - b.area)[0]?.id ?? null;
 
-            enterSection(sectionUnderCursor);
+            if (sectionUnderCursor) {
+                if (sectionExitTimer) window.clearTimeout(sectionExitTimer);
+                sectionExitTimer = null;
+                enterSection(sectionUnderCursor);
+            } else if (activeSection.current && !sectionExitTimer) {
+                // Brief gaps between panels or the floating buddy should not count as leaving a section.
+                sectionExitTimer = window.setTimeout(() => {
+                    sectionExitTimer = null;
+                    enterSection(null);
+                }, 800);
+            }
         };
         let cursorPosition: { x: number; y: number } | null = null;
         const handleCursorMove = (event: PointerEvent) => {
@@ -307,6 +322,7 @@ export default function GoofyBuddy() {
             if (speechTimer.current) window.clearInterval(speechTimer.current);
             if (greetingTimer.current) window.clearTimeout(greetingTimer.current);
             if (permissionTimer.current) window.clearTimeout(permissionTimer.current);
+            if (sectionExitTimer) window.clearTimeout(sectionExitTimer);
             window.removeEventListener("pointermove", handleCursorMove);
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("pointerdown", greetOnFirstInteraction, true);
@@ -364,6 +380,9 @@ export default function GoofyBuddy() {
         }
         if (greetingGestureOnBuddy.current) {
             greetingGestureOnBuddy.current = false;
+            setIsAngry(true);
+            if (angryTimer.current) window.clearTimeout(angryTimer.current);
+            angryTimer.current = window.setTimeout(() => setIsAngry(false), 1100);
             return;
         }
         const lines = TOUCH_LINES[activeSection.current ?? "top"] ?? TOUCH_LINES.top;
